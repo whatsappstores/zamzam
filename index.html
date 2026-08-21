@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ЗАМ ЗАМ — Национальная кухня</title>
+<meta name="description" content="ЗАМ ЗАМ — бургеры, пицца, суши, азиатская кухня и шаурма. Оформите заказ прямо в WhatsApp за 30 секунд.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --navy-900:#0F2E5C;
-    --blue-800:#123E7A;
+    --navy-800:#123E7A;
     --blue-700:#17509C;
     --blue-600:#2261B5;
     --blue-400:#7AA4DC;
@@ -18,228 +19,206 @@
     --ivory:#F6F7FB;
     --white:#FFFFFF;
     --line:#D7E1F2;
+    --whatsapp:#25D366;
+    --whatsapp-dark:#1DA851;
+    --font-display:'Montserrat',sans-serif;
+    --font-body:'Manrope',sans-serif;
+    --font-mono:'JetBrains Mono',monospace;
+    --radius:18px;
+    --shadow:0 14px 34px rgba(15,46,92,.14);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
+  section[id]{scroll-margin-top:96px;}
   body{
-    font-family:'Manrope',sans-serif;
+    font-family:var(--font-body);
     background:var(--ivory);
     color:var(--navy-900);
     -webkit-font-smoothing:antialiased;
   }
-  h1,h2,h3,.display{
-    font-family:'Montserrat',sans-serif;
-    letter-spacing:0.01em;
-  }
+  h1,h2,h3,.display{font-family:var(--font-display);letter-spacing:0.01em;}
   a{color:inherit;text-decoration:none;}
   img,svg{display:block;}
+  ul{list-style:none;}
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}html{scroll-behavior:auto;}}
 
-  /* ---------- WAVE MOTIF (signature element) ---------- */
+  /* ---------- BUTTONS ---------- */
+  .btn{display:inline-flex;align-items:center;gap:.55em;padding:.9em 1.7em;border-radius:999px;font-weight:700;font-size:14.5px;border:none;cursor:pointer;transition:transform .18s,box-shadow .18s,background .18s;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--navy-900);color:#fff;box-shadow:0 14px 26px -10px rgba(15,46,92,.5);}
+  .btn-primary:hover{background:var(--blue-700);}
+  .btn-whatsapp{background:var(--whatsapp);color:#fff;box-shadow:0 10px 22px -8px rgba(37,211,102,.5);}
+  .btn-whatsapp:hover{background:var(--whatsapp-dark);}
+  .btn-ghost{border:1.5px solid var(--blue-400);color:var(--blue-700);background:transparent;padding:.85em 1.6em;}
+  .btn-ghost:hover{background:var(--blue-700);border-color:var(--blue-700);color:#fff;}
+  .btn-full{width:100%;justify-content:center;}
+  .icon-wa{width:18px;height:18px;fill:currentColor;flex:none;}
+
+  /* ---------- WAVE MOTIF ---------- */
   .wave-divider{width:100%;line-height:0;}
   .wave-divider svg{width:100%;height:auto;display:block;}
 
   /* ---------- NAV ---------- */
-  header{
-    position:sticky;top:0;z-index:50;
-    background:rgba(246,247,251,0.92);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-wrap{
-    max-width:1180px;margin:0 auto;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px 28px;
-  }
+  header{position:sticky;top:0;z-index:60;background:rgba(246,247,251,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-wrap{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 28px;gap:16px;}
   .brand{display:flex;align-items:center;gap:12px;}
   .brand-mark{width:44px;height:44px;flex-shrink:0;}
   .brand-text{display:flex;flex-direction:column;line-height:1;}
-  .brand-text .name{font-weight:800;font-size:19px;color:var(--blue-700);letter-spacing:0.04em;}
-  .brand-text .sub{font-size:10px;letter-spacing:0.18em;color:var(--blue-400);font-weight:600;margin-top:3px;}
-  nav ul{list-style:none;display:flex;gap:32px;}
-  nav a{font-size:14px;font-weight:600;color:var(--navy-900);opacity:0.75;transition:opacity .2s, color .2s;position:relative;}
-  nav a:hover{opacity:1;color:var(--blue-700);}
-  .nav-cta{
-    background:var(--blue-700);color:#fff;padding:10px 22px;border-radius:999px;
-    font-weight:700;font-size:13.5px;letter-spacing:0.03em;
-    box-shadow:0 8px 18px -8px rgba(23,80,156,0.55);
-    transition:transform .2s, box-shadow .2s;
-  }
-  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 22px -6px rgba(23,80,156,0.6);}
-  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px;}
-  .burger span{width:24px;height:2.5px;background:var(--blue-700);border-radius:2px;}
+  .brand-text .name{font-weight:800;font-size:19px;color:var(--blue-700);letter-spacing:.04em;}
+  .brand-text .sub{font-size:10px;letter-spacing:.18em;color:var(--blue-400);font-weight:600;margin-top:3px;}
+  nav.main-nav{display:flex;gap:28px;}
+  nav.main-nav a{font-size:14px;font-weight:600;color:var(--navy-900);opacity:.75;transition:opacity .2s,color .2s;position:relative;padding:.3em 0;}
+  nav.main-nav a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--blue-600);transition:width .2s ease;}
+  nav.main-nav a:hover{opacity:1;color:var(--blue-700);}
+  nav.main-nav a:hover::after{width:100%;}
+  .header-actions{display:flex;align-items:center;gap:10px;}
+  .cart-toggle{position:relative;background:#fff;border:1.5px solid var(--line);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+  .cart-toggle:hover{border-color:var(--blue-400);}
+  .icon-cart{width:20px;height:20px;fill:none;stroke:var(--blue-700);stroke-width:1.8;}
+  .cart-count{position:absolute;top:-6px;right:-6px;background:var(--blue-700);color:#fff;font-family:var(--font-mono);font-size:.65rem;font-weight:700;width:19px;height:19px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{width:22px;height:2px;background:var(--blue-700);display:block;}
 
   /* ---------- HERO ---------- */
-  .hero{
-    position:relative;
-    padding:86px 28px 0;
-    max-width:1180px;margin:0 auto;
-    display:flex;align-items:center;gap:64px;
-    min-height:560px;
-  }
+  .hero{position:relative;padding:86px 28px 0;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:64px;min-height:520px;}
   .hero-copy{flex:1;position:relative;z-index:2;}
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:10px;
-    font-size:12.5px;font-weight:700;letter-spacing:0.22em;
-    color:var(--blue-600);text-transform:uppercase;margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:26px;height:2px;background:var(--blue-500,#3D6FC4);display:inline-block;}
-  .hero h1{
-    font-size:clamp(40px,5.4vw,68px);
-    font-weight:900;line-height:1.02;color:var(--navy-900);
-    margin-bottom:22px;
-  }
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;letter-spacing:.22em;color:var(--blue-600);text-transform:uppercase;margin-bottom:22px;}
+  .eyebrow::before{content:'';width:26px;height:2px;background:var(--blue-600);display:inline-block;}
+  .hero h1{font-size:clamp(40px,5.4vw,64px);font-weight:900;line-height:1.02;color:var(--navy-900);margin-bottom:22px;}
   .hero h1 span{color:var(--blue-700);}
-  .hero p.lede{
-    font-size:17px;line-height:1.65;color:#3B4A63;max-width:460px;margin-bottom:34px;font-weight:500;
-  }
+  .hero p.lede{font-size:17px;line-height:1.65;color:#3B4A63;max-width:460px;margin-bottom:34px;font-weight:500;}
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
-  .btn-primary{
-    background:var(--navy-900);color:#fff;padding:15px 30px;border-radius:999px;
-    font-weight:700;font-size:14.5px;letter-spacing:0.02em;
-    box-shadow:0 14px 26px -10px rgba(15,46,92,0.5);
-    transition:transform .2s, box-shadow .2s, background .2s;
-  }
-  .btn-primary:hover{transform:translateY(-2px);background:var(--blue-700);}
-  .btn-ghost{
-    border:1.5px solid var(--blue-400);color:var(--blue-700);padding:14px 28px;border-radius:999px;
-    font-weight:700;font-size:14.5px;transition:all .2s;
-  }
-  .btn-ghost:hover{background:var(--blue-700);border-color:var(--blue-700);color:#fff;}
-
-  .hero-emblem{
-    flex-shrink:0;width:min(360px,38vw);position:relative;z-index:2;
-  }
+  .hero-emblem{flex-shrink:0;width:min(340px,36vw);position:relative;z-index:2;}
   .hero-emblem svg{width:100%;height:auto;animation:float 6s ease-in-out infinite;}
   @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  .hero-bg-wave{position:absolute;left:0;right:0;bottom:-2px;z-index:1;opacity:.9;}
 
-  .hero-bg-wave{position:absolute;left:0;right:0;bottom:-2px;z-index:1;opacity:0.9;}
-
-  /* ---------- STRIP / STATS ---------- */
-  .strip{
-    background:var(--navy-900);color:#fff;
-    padding:0;
-  }
-  .strip-inner{
-    max-width:1180px;margin:0 auto;padding:26px 28px;
-    display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:space-between;align-items:center;
-  }
+  /* ---------- STRIP ---------- */
+  .strip{background:var(--navy-900);color:#fff;}
+  .strip-inner{max-width:1180px;margin:0 auto;padding:26px 28px;display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:space-between;align-items:center;}
   .strip-item{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;color:#DCE6F7;}
   .strip-item svg{width:20px;height:20px;flex-shrink:0;stroke:#7AA4DC;}
 
-  /* ---------- SECTION HEADINGS ---------- */
+  /* ---------- SECTION HEADS ---------- */
   .section{max-width:1180px;margin:0 auto;padding:96px 28px;}
   .section-head{text-align:center;max-width:640px;margin:0 auto 56px;}
   .section-head .eyebrow{display:inline-flex;justify-content:center;}
   .section-head h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;color:var(--navy-900);margin-bottom:14px;}
   .section-head p{color:#5C6C87;font-size:15.5px;font-weight:500;line-height:1.6;}
+  .setup-note{margin-top:18px;font-size:12.5px;color:var(--blue-600);background:var(--blue-200);display:inline-block;padding:8px 16px;border-radius:999px;font-weight:700;}
 
-  /* ---------- CATEGORY NAV (tabs) ---------- */
-  .cat-tabs{
-    display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
-    margin-bottom:64px;
-  }
-  .cat-tab{
-    display:flex;align-items:center;gap:10px;
-    padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);
-    background:#fff;font-weight:700;font-size:14px;color:var(--navy-900);
-    cursor:pointer;transition:all .2s;
-  }
-  .cat-tab svg{width:20px;height:20px;stroke:var(--blue-700);}
+  /* ---------- CATEGORY TABS ---------- */
+  .cat-tabs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:64px;}
+  .cat-tab{display:flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:14px;color:var(--navy-900);cursor:pointer;transition:all .2s;}
   .cat-tab:hover{border-color:var(--blue-400);transform:translateY(-2px);}
-  .cat-tab.active{background:var(--blue-700);border-color:var(--blue-700);color:#fff;box-shadow:0 12px 24px -10px rgba(23,80,156,0.55);}
-  .cat-tab.active svg{stroke:#fff;}
+  .cat-tab.active{background:var(--blue-700);border-color:var(--blue-700);color:#fff;box-shadow:0 12px 24px -10px rgba(23,80,156,.55);}
 
   /* ---------- MENU CATEGORY BLOCKS ---------- */
   .menu-category{margin-bottom:88px;scroll-margin-top:110px;}
   .menu-category:last-child{margin-bottom:0;}
-  .cat-heading{
-    display:flex;align-items:center;gap:18px;margin-bottom:30px;
-  }
-  .cat-heading .icon-badge{
-    width:52px;height:52px;border-radius:16px;background:var(--blue-700);
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;
-    box-shadow:0 10px 20px -8px rgba(23,80,156,0.5);
-  }
+  .cat-heading{display:flex;align-items:center;gap:18px;margin-bottom:30px;}
+  .cat-heading .icon-badge{width:52px;height:52px;border-radius:16px;background:var(--blue-700);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 10px 20px -8px rgba(23,80,156,.5);}
   .cat-heading .icon-badge svg{width:28px;height:28px;stroke:#fff;}
   .cat-heading h3{font-size:26px;font-weight:800;color:var(--navy-900);}
-  .cat-heading .count{font-size:13px;color:#8496B3;font-weight:600;margin-left:auto;}
+  .cat-heading .count{font-size:13px;color:#8496B3;font-weight:600;margin-left:auto;font-family:var(--font-mono);}
   .cat-divider{height:1px;background:var(--line);margin-bottom:34px;}
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;}
 
-  .card-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px;
-  }
-  /* Empty placeholder item card — a ready-to-fill template slot */
-  .item-card{
-    border:1.5px dashed var(--blue-200);
-    border-radius:20px;
-    background:#fff;
-    padding:20px;
-    display:flex;flex-direction:column;gap:14px;
-    transition:border-color .2s, transform .2s, box-shadow .2s;
-    min-height:230px;
-  }
-  .item-card:hover{border-color:var(--blue-400);transform:translateY(-3px);box-shadow:0 16px 30px -16px rgba(23,80,156,0.35);}
-  .item-card .thumb{
-    height:110px;border-radius:14px;
-    background:repeating-linear-gradient(135deg, var(--blue-200) 0 2px, transparent 2px 14px);
-    background-color:#FBFCFE;
-    border:1px solid var(--line);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .item-card .thumb svg{width:30px;height:30px;stroke:var(--blue-400);opacity:0.7;}
-  .placeholder-line{height:10px;border-radius:6px;background:var(--blue-200);opacity:0.55;}
-  .placeholder-line.title{width:70%;height:12px;}
-  .placeholder-line.desc-1{width:95%;}
-  .placeholder-line.desc-2{width:60%;}
-  .item-card .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:6px;}
-  .item-card .price-slot{
-    font-size:11.5px;font-weight:700;letter-spacing:0.04em;color:var(--blue-400);
-    border:1px dashed var(--blue-200);border-radius:8px;padding:5px 10px;
-  }
-  .item-card .add-slot{
-    width:30px;height:30px;border-radius:50%;border:1px dashed var(--blue-400);
-    display:flex;align-items:center;justify-content:center;color:var(--blue-400);font-size:16px;font-weight:700;
-  }
+  /* ---------- DISH CARD ---------- */
+  .dish-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;border:1px solid var(--line);cursor:pointer;transition:transform .15s,box-shadow .15s;}
+  .dish-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(15,46,92,.25);}
+  .dish-photo{position:relative;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--blue-200) 0 2px,transparent 2px 14px);background-color:#FBFCFE;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);}
+  .dish-photo .photo-fallback{font-family:var(--font-mono);font-size:.66rem;color:var(--blue-400);background:rgba(255,255,255,.8);padding:.3em .6em;border-radius:6px;}
+  .dish-photo-badge{position:absolute;bottom:10px;left:10px;width:34px;height:34px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.05rem;box-shadow:0 4px 10px rgba(15,46,92,.18);}
+  .dish-body{padding:1.15rem 1.25rem 1.3rem;display:flex;flex-direction:column;gap:.4rem;flex:1;}
+  .dish-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;}
+  .dish-name{font-weight:700;font-size:1rem;font-family:var(--font-display);}
+  .dish-price{font-family:var(--font-mono);font-weight:700;color:var(--blue-700);white-space:nowrap;}
+  .dish-desc{font-size:.83rem;color:#5C6C87;flex:1;}
+  .dish-weight{font-family:var(--font-mono);font-size:.7rem;color:#8496B3;}
+  .dish-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;flex-wrap:wrap;gap:.5rem;}
+  .qty-stepper{display:flex;align-items:center;gap:.55rem;font-family:var(--font-mono);font-weight:700;}
+  .qty-stepper button{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--navy-900);background:none;cursor:pointer;font-size:1rem;line-height:1;display:flex;align-items:center;justify-content:center;color:var(--navy-900);}
+  .qty-stepper button:hover{border-color:var(--blue-600);color:var(--blue-600);}
+  .add-btn{background:var(--navy-900);color:#fff;border:none;border-radius:999px;padding:.5em 1.1em;font-weight:700;font-size:.78rem;cursor:pointer;}
+  .add-btn:hover{background:var(--blue-700);}
+  .add-btn.in-cart{background:var(--whatsapp);}
+  .photo-slot.has-photo .photo-fallback{display:none;}
 
-  /* ---------- ABOUT / VALUES ---------- */
+  /* ---------- VALUES ---------- */
   .values{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .values-grid{
-    max-width:1180px;margin:0 auto;padding:88px 28px;
-    display:grid;grid-template-columns:repeat(3,1fr);gap:36px;
-  }
-  .value{padding:8px;}
-  .value .num{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;color:var(--blue-400);letter-spacing:0.1em;margin-bottom:14px;}
+  .values-grid{max-width:1180px;margin:0 auto;padding:88px 28px;display:grid;grid-template-columns:repeat(3,1fr);gap:36px;}
+  .value .num{font-family:var(--font-mono);font-size:13px;font-weight:800;color:var(--blue-400);letter-spacing:.1em;margin-bottom:14px;}
   .value h4{font-size:19px;font-weight:800;color:var(--navy-900);margin-bottom:10px;}
   .value p{font-size:14.5px;color:#5C6C87;line-height:1.6;font-weight:500;}
 
-  /* ---------- CONTACT / FOOTER ---------- */
+  /* ---------- CART DRAWER ---------- */
+  .cart-overlay{position:fixed;inset:0;background:rgba(15,46,92,.55);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:80;}
+  .cart-overlay.open{opacity:1;pointer-events:auto;}
+  .cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:#fff;z-index:90;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(15,46,92,.25);}
+  .cart-drawer.open{transform:translateX(0);}
+  .cart-head{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;border-bottom:1px solid var(--line);}
+  .cart-head h3{margin:0;font-size:1.25rem;}
+  .cart-head-actions{display:flex;align-items:center;gap:1rem;}
+  .cart-clear{background:none;border:none;font-family:var(--font-body);font-weight:700;font-size:.78rem;color:var(--blue-700);cursor:pointer;padding:.3em 0;}
+  .cart-clear:hover{text-decoration:underline;}
+  .cart-close{background:none;border:none;font-size:1.8rem;line-height:1;cursor:pointer;color:var(--navy-900);}
+  .cart-body{flex:1;overflow-y:auto;padding:1.2rem 1.6rem;}
+  .cart-empty{color:#8496B3;font-size:.9rem;}
+  .cart-items{display:flex;flex-direction:column;gap:1rem;}
+  .cart-item{display:flex;justify-content:space-between;align-items:center;gap:.6rem;background:var(--ivory);border-radius:10px;padding:.7rem .9rem;}
+  .cart-item-name{font-weight:700;font-size:.86rem;}
+  .cart-item-line{font-family:var(--font-mono);font-size:.7rem;color:#8496B3;}
+  .cart-item-right{display:flex;align-items:center;gap:.6rem;}
+  .cart-item-remove{background:none;border:none;color:#C1272D;font-size:1.1rem;cursor:pointer;line-height:1;}
+  .cart-foot{border-top:1px solid var(--line);padding:1.2rem 1.6rem 1.6rem;display:flex;flex-direction:column;gap:.8rem;}
+  .cart-field{display:flex;flex-direction:column;gap:.3rem;font-size:.78rem;font-weight:700;color:#3B4A63;}
+  .cart-field input{font-family:var(--font-body);padding:.6em .8em;border-radius:8px;border:1.5px solid var(--line);font-size:.88rem;}
+  .cart-field input:focus-visible{outline:2px solid var(--blue-600);}
+  .cart-total{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-weight:700;font-size:1.1rem;padding-top:.3rem;}
+  .cart-hint{font-size:.72rem;color:#8496B3;text-align:center;margin:0;}
+
+  /* ---------- DISH MODAL ---------- */
+  .dish-modal-overlay{position:fixed;inset:0;background:rgba(15,46,92,.6);opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:95;}
+  .dish-modal-overlay.open{opacity:1;pointer-events:auto;}
+  .dish-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-46%) scale(.97);width:min(480px,calc(100% - 32px));max-height:min(88vh,720px);overflow-y:auto;background:#fff;border-radius:var(--radius);box-shadow:0 30px 60px rgba(15,46,92,.35);z-index:96;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;}
+  .dish-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1);}
+  .dish-modal-close{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:1.6rem;line-height:1;cursor:pointer;color:var(--navy-900);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(15,46,92,.18);}
+  .dish-modal-photo{position:relative;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--blue-200) 0 2px,transparent 2px 14px);background-color:#FBFCFE;display:flex;align-items:center;justify-content:center;border-radius:var(--radius) var(--radius) 0 0;}
+  .dish-modal-body{padding:1.4rem 1.5rem 1.6rem;}
+  .dish-modal-price{font-family:var(--font-mono);font-weight:700;color:var(--blue-700);font-size:1.15rem;margin:0 0 .3rem;}
+  .dish-modal-body h3{font-size:1.35rem;margin:0 0 .4rem;}
+  .dish-modal-weight{font-family:var(--font-mono);font-size:.78rem;color:#8496B3;margin:0 0 .9rem;display:block;}
+  .dish-modal-desc{font-size:.92rem;color:#3B4A63;margin:0 0 1.4rem;line-height:1.6;}
+  .dish-modal-actions{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+  #dishModalAddBtn{padding:.65em 1.4em;font-size:.88rem;}
+
+  /* ---------- FLOATING WHATSAPP ---------- */
+  .float-whatsapp{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:var(--whatsapp);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(37,211,102,.5);z-index:55;animation:pulse-wa 2.6s ease-in-out infinite;}
+  .float-whatsapp svg{width:28px;height:28px;fill:#fff;}
+  @keyframes pulse-wa{0%,100%{box-shadow:0 10px 26px rgba(37,211,102,.5);}50%{box-shadow:0 10px 26px rgba(37,211,102,.85),0 0 0 8px rgba(37,211,102,.15);}}
+
+  /* ---------- FOOTER ---------- */
   footer{background:var(--navy-900);color:#fff;position:relative;overflow:hidden;}
-  .footer-wave{opacity:0.5;}
-  .footer-inner{
-    max-width:1180px;margin:0 auto;padding:20px 28px 56px;
-    display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:48px;
-    position:relative;z-index:2;
-  }
+  .footer-wave{opacity:.5;}
+  .footer-inner{max-width:1180px;margin:0 auto;padding:20px 28px 56px;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:48px;position:relative;z-index:2;}
   .footer-brand{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
   .footer-brand .brand-mark{width:48px;height:48px;}
-  .footer-brand .name{font-weight:800;font-size:20px;letter-spacing:0.04em;}
-  .footer-brand .sub{font-size:10.5px;letter-spacing:0.18em;color:var(--blue-400);font-weight:600;}
+  .footer-brand .name{font-weight:800;font-size:20px;letter-spacing:.04em;}
+  .footer-brand .sub{font-size:10.5px;letter-spacing:.18em;color:var(--blue-400);font-weight:600;}
   footer .desc{color:#B7C6E2;font-size:14px;line-height:1.65;max-width:320px;font-weight:500;}
-  footer h5{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-400);font-weight:700;margin-bottom:18px;}
-  footer ul{list-style:none;display:flex;flex-direction:column;gap:12px;}
-  footer ul a, footer ul li{font-size:14.5px;color:#DCE6F7;font-weight:500;}
+  footer h5{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-400);font-weight:700;margin-bottom:18px;}
+  footer ul{display:flex;flex-direction:column;gap:12px;}
+  footer ul a,footer ul li{font-size:14.5px;color:#DCE6F7;font-weight:500;}
   footer ul a:hover{color:#fff;}
-  .footer-bottom{
-    border-top:1px solid rgba(255,255,255,0.12);
-    max-width:1180px;margin:0 auto;padding:22px 28px;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-    font-size:12.5px;color:#8FA3C7;position:relative;z-index:2;
-  }
+  .footer-wa-link{display:inline-flex;align-items:center;gap:8px;color:var(--whatsapp) !important;font-weight:700 !important;}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12);max-width:1180px;margin:0 auto;padding:22px 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:#8FA3C7;position:relative;z-index:2;}
 
   @media (max-width:860px){
-    nav ul{display:none;}
-    .nav-cta{display:none;}
-    .burger{display:flex;}
+    nav.main-nav{position:fixed;top:73px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .25s ease;border-bottom:1px solid var(--line);}
+    nav.main-nav.open{max-height:360px;padding:.6rem 0;}
+    nav.main-nav a{padding:1rem 24px;width:100%;}
+    .nav-toggle{display:flex;}
     .hero{flex-direction:column;padding-top:56px;text-align:center;gap:40px;}
     .hero-copy{display:flex;flex-direction:column;align-items:center;}
     .eyebrow::before{display:none;}
@@ -254,9 +233,9 @@
 <body>
 
 <!-- ================= NAV ================= -->
-<header>
+<header id="top">
   <div class="nav-wrap">
-    <div class="brand">
+    <a href="#top" class="brand" aria-label="ЗАМ ЗАМ — на главную">
       <svg class="brand-mark" viewBox="0 0 100 100" fill="none">
         <circle cx="50" cy="50" r="47" stroke="#17509C" stroke-width="4"/>
         <circle cx="50" cy="48" r="30" stroke="#17509C" stroke-width="3"/>
@@ -269,32 +248,44 @@
         <span class="name">ЗАМ ЗАМ</span>
         <span class="sub">НАЦИОНАЛЬНАЯ КУХНЯ</span>
       </div>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#menu">Меню</a></li>
-        <li><a href="#burgers">Бургеры</a></li>
-        <li><a href="#pizza">Пицца</a></li>
-        <li><a href="#sushi">Суши</a></li>
-        <li><a href="#asian">Азиатская кухня</a></li>
-        <li><a href="#shaurma">Шаурма</a></li>
-        <li><a href="#about">О нас</a></li>
-      </ul>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#menu">Меню</a>
+      <a href="#burgers">Бургеры</a>
+      <a href="#pizza">Пицца</a>
+      <a href="#sushi">Суши</a>
+      <a href="#asian">Азиатская кухня</a>
+      <a href="#shaurma">Шаурма</a>
+      <a href="#about">О нас</a>
     </nav>
-    <a href="#contacts" class="nav-cta">Заказать</a>
-    <button class="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="header-actions">
+      <a href="#" id="headerWhatsapp" class="btn btn-whatsapp" style="padding:.6em 1.1em;font-size:.82rem;" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" class="icon-wa" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4c1.5.9 3.3 1.4 5.1 1.4 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.9 15 3.3 13.5 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.3 12 20.3z"/></svg>
+        <span>Заказать</span>
+      </a>
+      <button class="cart-toggle" id="cartToggle" aria-label="Корзина">
+        <svg class="icon-cart" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M6 6L4.5 2H2"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Меню сайта"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
+
+<main>
 
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="hero-copy">
     <span class="eyebrow">Пять кухонь · Один стол</span>
     <h1>Вкус мира<br>в сердце <span>ЗАМ ЗАМ</span></h1>
-    <p class="lede">От сочных бургеров до нежных суши-роллов — мы собрали любимые блюда со всего света под одной крышей. Свежо, честно, по-нашему.</p>
+    <p class="lede">От сочных бургеров до нежных суши-роллов — мы собрали любимые блюда со всего света под одной крышей. Заказ — прямо в WhatsApp, без форм и звонков.</p>
     <div class="hero-actions">
-      <a href="#menu" class="btn-primary">Смотреть меню</a>
-      <a href="#about" class="btn-ghost">О ресторане</a>
+      <a href="#menu" class="btn btn-primary">Смотреть меню</a>
+      <a href="#" id="heroWhatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" class="icon-wa" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4c1.5.9 3.3 1.4 5.1 1.4 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.9 15 3.3 13.5 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.3 12 20.3z"/></svg>
+        Написать и заказать
+      </a>
     </div>
   </div>
   <div class="hero-emblem">
@@ -317,7 +308,7 @@
 <div class="strip">
   <div class="strip-inner">
     <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>Открыты ежедневно · 10:00–23:00</div>
-    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Собственная кухня и доставка</div>
+    <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>Заказ принимаем прямо в WhatsApp</div>
     <div class="strip-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Национальная кухня для всей семьи</div>
   </div>
 </div>
@@ -327,110 +318,55 @@
   <div class="section-head">
     <span class="eyebrow">Меню ресторана</span>
     <h2>Выберите свою кухню</h2>
-    <p>Пять направлений — бургеры, пицца, суши, азиатская кухня и шаурма. Карточки блюд скоро заполнятся вашими любимыми позициями.</p>
+    <p>Добавляйте блюда в корзину — она сама посчитает сумму, а заказ уйдёт в WhatsApp одним нажатием.</p>
+    <span class="setup-note">⚙️ Названия, фото и цены ниже — временные заглушки. Отредактируйте массив MENU внутри файла перед запуском.</span>
   </div>
 
-  <div class="cat-tabs">
-    <a href="#burgers" class="cat-tab active">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 12h16"/><path d="M3 9c0-3 4-5 9-5s9 2 9 5"/><path d="M4 15h16v1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-1Z"/></svg>
-      Бургеры
-    </a>
-    <a href="#pizza" class="cat-tab">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 6 12 3l10 3-10 17L2 6Z"/><circle cx="10" cy="9" r="1"/><circle cx="14" cy="13" r="1"/></svg>
-      Пицца
-    </a>
-    <a href="#sushi" class="cat-tab">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="8" cy="9" r="4"/><circle cx="16" cy="15" r="4"/><circle cx="8" cy="9" r="1.4"/><circle cx="16" cy="15" r="1.4"/></svg>
-      Суши
-    </a>
-    <a href="#asian" class="cat-tab">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 10h16l-1.5 8a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 10Z"/><path d="M12 10c-4 0-6-2-6-4"/><path d="M18 4l-1 2M20 6l-1.5 1.5"/></svg>
-      Азиатская кухня
-    </a>
-    <a href="#shaurma" class="cat-tab">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M8 3c3 0 8 1 8 5s-5 13-8 13-3-9-3-13 0-5 3-5Z"/><path d="M6 9h9M6.5 13h8.5"/></svg>
-      Шаурма
-    </a>
-  </div>
+  <div class="cat-tabs" id="catTabs"></div>
 
-  <!-- ---- БУРГЕРЫ ---- -->
   <div class="menu-category" id="burgers">
     <div class="cat-heading">
       <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#fff"><path d="M4 12h16"/><path d="M3 9c0-3 4-5 9-5s9 2 9 5"/><path d="M4 15h16v1a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-1Z"/></svg></div>
-      <h3>Бургеры</h3>
-      <span class="count">Раздел в разработке</span>
+      <h3>Бургеры</h3><span class="count" id="burgersCount"></span>
     </div>
     <div class="cat-divider"></div>
-    <div class="card-grid">
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-    </div>
+    <div class="card-grid" id="burgersGrid"></div>
   </div>
 
-  <!-- ---- ПИЦЦА ---- -->
   <div class="menu-category" id="pizza">
     <div class="cat-heading">
       <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#fff"><path d="M2 6 12 3l10 3-10 17L2 6Z"/><circle cx="10" cy="9" r="1"/><circle cx="14" cy="13" r="1"/></svg></div>
-      <h3>Пицца</h3>
-      <span class="count">Раздел в разработке</span>
+      <h3>Пицца</h3><span class="count" id="pizzaCount"></span>
     </div>
     <div class="cat-divider"></div>
-    <div class="card-grid">
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-    </div>
+    <div class="card-grid" id="pizzaGrid"></div>
   </div>
 
-  <!-- ---- СУШИ ---- -->
   <div class="menu-category" id="sushi">
     <div class="cat-heading">
       <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#fff"><circle cx="8" cy="9" r="4"/><circle cx="16" cy="15" r="4"/><circle cx="8" cy="9" r="1.4"/><circle cx="16" cy="15" r="1.4"/></svg></div>
-      <h3>Суши</h3>
-      <span class="count">Раздел в разработке</span>
+      <h3>Суши</h3><span class="count" id="sushiCount"></span>
     </div>
     <div class="cat-divider"></div>
-    <div class="card-grid">
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-    </div>
+    <div class="card-grid" id="sushiGrid"></div>
   </div>
 
-  <!-- ---- АЗИАТСКАЯ КУХНЯ ---- -->
   <div class="menu-category" id="asian">
     <div class="cat-heading">
       <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#fff"><path d="M4 10h16l-1.5 8a2 2 0 0 1-2 1.7H7.5a2 2 0 0 1-2-1.7L4 10Z"/><path d="M12 10c-4 0-6-2-6-4"/><path d="M18 4l-1 2M20 6l-1.5 1.5"/></svg></div>
-      <h3>Азиатская кухня</h3>
-      <span class="count">Раздел в разработке</span>
+      <h3>Азиатская кухня</h3><span class="count" id="asianCount"></span>
     </div>
     <div class="cat-divider"></div>
-    <div class="card-grid">
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-    </div>
+    <div class="card-grid" id="asianGrid"></div>
   </div>
 
-  <!-- ---- ШАУРМА ---- -->
   <div class="menu-category" id="shaurma">
     <div class="cat-heading">
       <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="#fff"><path d="M8 3c3 0 8 1 8 5s-5 13-8 13-3-9-3-13 0-5 3-5Z"/><path d="M6 9h9M6.5 13h8.5"/></svg></div>
-      <h3>Шаурма</h3>
-      <span class="count">Раздел в разработке</span>
+      <h3>Шаурма</h3><span class="count" id="shaurmaCount"></span>
     </div>
     <div class="cat-divider"></div>
-    <div class="card-grid">
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-      <div class="item-card"><div class="thumb"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 15l5-5 4 4 5-6 4 4"/></svg></div><div class="placeholder-line title"></div><div class="placeholder-line desc-1"></div><div class="placeholder-line desc-2"></div><div class="foot"><span class="price-slot">— сом</span><span class="add-slot">+</span></div></div>
-    </div>
+    <div class="card-grid" id="shaurmaGrid"></div>
   </div>
 </section>
 
@@ -448,8 +384,8 @@
     </div>
     <div class="value">
       <div class="num">02</div>
-      <h4>Всегда свежо</h4>
-      <p>Каждое блюдо готовится по заказу из свежих продуктов — никакой заморозки и долгого ожидания на полке.</p>
+      <h4>Заказ за 30 секунд</h4>
+      <p>Собираете корзину на сайте, нажимаете «Оформить заказ» — список блюд, адрес и сумма уже готовы в чате WhatsApp.</p>
     </div>
     <div class="value">
       <div class="num">03</div>
@@ -459,7 +395,68 @@
   </div>
 </section>
 
-<!-- ================= FOOTER / CONTACTS ================= -->
+</main>
+
+<!-- ================= CART DRAWER ================= -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Корзина заказа">
+  <div class="cart-head">
+    <h3>Ваш заказ</h3>
+    <div class="cart-head-actions">
+      <button class="cart-clear" id="cartClear" type="button">Очистить</button>
+      <button class="cart-close" id="cartClose" aria-label="Закрыть корзину">&times;</button>
+    </div>
+  </div>
+  <div class="cart-body">
+    <p class="cart-empty" id="cartEmpty">Корзина пуста. Начните с бургера или ролла 🍔</p>
+    <ul class="cart-items" id="cartItems"></ul>
+  </div>
+  <div class="cart-foot">
+    <label class="cart-field">Адрес доставки
+      <input type="text" id="orderAddress" placeholder="Улица, дом, квартира, домофон">
+    </label>
+    <label class="cart-field">Комментарий к заказу
+      <input type="text" id="orderComment" placeholder="Например: позвонить за 10 минут">
+    </label>
+    <div class="cart-total"><span>Итого</span><span id="cartTotal">0 сом</span></div>
+    <button class="btn btn-whatsapp btn-full" id="checkoutWhatsapp">
+      <svg viewBox="0 0 24 24" class="icon-wa" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4c1.5.9 3.3 1.4 5.1 1.4 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.9 15 3.3 13.5 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.3 12 20.3z"/></svg>
+      Оформить заказ в WhatsApp
+    </button>
+    <p class="cart-hint">Откроется чат WhatsApp с готовым списком блюд — просто нажмите «Отправить».</p>
+  </div>
+</aside>
+
+<!-- ================= DISH MODAL ================= -->
+<div class="dish-modal-overlay" id="dishModalOverlay"></div>
+<div class="dish-modal" id="dishModal" role="dialog" aria-modal="true" aria-labelledby="dishModalName">
+  <button class="dish-modal-close" id="dishModalClose" aria-label="Закрыть">&times;</button>
+  <div class="dish-modal-photo">
+    <span class="photo-fallback" id="dishModalPhotoFallback"></span>
+    <span class="dish-photo-badge" id="dishModalBadge"></span>
+  </div>
+  <div class="dish-modal-body">
+    <p class="dish-modal-price" id="dishModalPrice"></p>
+    <h3 id="dishModalName"></h3>
+    <span class="dish-modal-weight" id="dishModalWeight"></span>
+    <p class="dish-modal-desc" id="dishModalDesc"></p>
+    <div class="dish-modal-actions">
+      <div class="qty-stepper" id="dishModalStepper">
+        <button class="qty-minus" id="dishModalMinus" aria-label="Убрать одну штуку">−</button>
+        <span class="qty-value" id="dishModalQty">0</span>
+        <button class="qty-plus" id="dishModalPlus" aria-label="Добавить одну штуку">+</button>
+      </div>
+      <button class="add-btn" id="dishModalAddBtn">В корзину</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FLOATING WHATSAPP ================= -->
+<a href="#" id="floatWhatsapp" class="float-whatsapp" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.3 0 1.4 1 2.7 1.1 2.9.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.2-.3-.3-.6-.4z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.5 5.2L2 22l4.9-1.4c1.5.9 3.3 1.4 5.1 1.4 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.3c-1.7 0-3.3-.5-4.6-1.3l-.3-.2-3.1.9.9-3-.2-.3C3.9 15 3.3 13.5 3.3 12 3.3 7.2 7.2 3.3 12 3.3S20.7 7.2 20.7 12 16.8 20.3 12 20.3z"/></svg>
+</a>
+
+<!-- ================= FOOTER ================= -->
 <footer id="contacts">
   <div class="wave-divider footer-wave">
     <svg viewBox="0 0 1440 40" preserveAspectRatio="none"><path d="M0,15 C240,35 480,0 720,15 C960,30 1200,0 1440,15 L1440,40 L0,40 Z" fill="#17509C" opacity="0.4"/></svg>
@@ -474,12 +471,17 @@
           <path d="M27 55C34 50 42 60 50 55C58 50 66 60 73 55" stroke="#7AA4DC" stroke-width="2.6" stroke-linecap="round" fill="none"/>
           <path d="M27 62C34 57 42 67 50 62C58 57 66 67 73 62" stroke="#7AA4DC" stroke-width="2.6" stroke-linecap="round" fill="none"/>
         </svg>
-        <div>
-          <div class="name">ЗАМ ЗАМ</div>
-          <div class="sub">НАЦИОНАЛЬНАЯ КУХНЯ</div>
-        </div>
+        <div><div class="name">ЗАМ ЗАМ</div><div class="sub">НАЦИОНАЛЬНАЯ КУХНЯ</div></div>
       </div>
-      <p class="desc">Ресторан национальной кухни, где встречаются бургеры, пицца, суши, азиатские блюда и шаурма. Заходите — накормим вкусно.</p>
+      <p class="desc">Бургеры, пицца, суши, азиатская кухня и шаурма под одной крышей. Заказ принимаем прямо в WhatsApp.</p>
+    </div>
+    <div>
+      <h5>Контакты</h5>
+      <ul>
+        <li><a href="tel:+996506300898">+996 506 300 898</a></li>
+        <li><a href="#" id="footerWhatsapp" class="footer-wa-link" target="_blank" rel="noopener">Написать в WhatsApp</a></li>
+        <li>г. __________, ул. __________</li>
+      </ul>
     </div>
     <div>
       <h5>Меню</h5>
@@ -491,14 +493,6 @@
         <li><a href="#shaurma">Шаурма</a></li>
       </ul>
     </div>
-    <div>
-      <h5>Контакты</h5>
-      <ul>
-        <li>г. __________, ул. __________</li>
-        <li>+996 (___) ___-___</li>
-        <li>Ежедневно · 10:00–23:00</li>
-      </ul>
-    </div>
   </div>
   <div class="footer-bottom">
     <span>© 2026 ЗАМ ЗАМ. Все права защищены.</span>
@@ -506,5 +500,360 @@
   </div>
 </footer>
 
+<script>
+/* ==========================================================
+   НАСТРОЙКИ — поменяйте под свой ресторан
+   ========================================================== */
+const CONFIG = {
+  // Номер WhatsApp в международном формате БЕЗ "+", пробелов и скобок
+  whatsappPhone: "996506300898",
+  greetingMessage: "Здравствуйте! Хочу сделать заказ в ЗАМ ЗАМ 🍔🍕🍣",
+  restaurantName: "ЗАМ ЗАМ",
+  currency: "сом"
+};
+
+/* ==========================================================
+   МЕНЮ — временные позиции-заглушки.
+   Замените name / desc / weight / price на настоящие блюда,
+   добавьте фото images/{id}.jpg — карточки подхватят их сами.
+   ========================================================== */
+const MENU = [
+  { cat:"burgers", catLabel:"Бургеры", glyph:"🍔", items:[
+    { id:"bg1", name:"Название блюда 1", desc:"Краткое описание состава блюда", weight:"— г", price:250 },
+    { id:"bg2", name:"Название блюда 2", desc:"Краткое описание состава блюда", weight:"— г", price:280 },
+    { id:"bg3", name:"Название блюда 3", desc:"Краткое описание состава блюда", weight:"— г", price:300 },
+    { id:"bg4", name:"Название блюда 4", desc:"Краткое описание состава блюда", weight:"— г", price:320 }
+  ]},
+  { cat:"pizza", catLabel:"Пицца", glyph:"🍕", items:[
+    { id:"pz1", name:"Название блюда 1", desc:"Краткое описание состава блюда", weight:"— г", price:380 },
+    { id:"pz2", name:"Название блюда 2", desc:"Краткое описание состава блюда", weight:"— г", price:420 },
+    { id:"pz3", name:"Название блюда 3", desc:"Краткое описание состава блюда", weight:"— г", price:450 },
+    { id:"pz4", name:"Название блюда 4", desc:"Краткое описание состава блюда", weight:"— г", price:480 }
+  ]},
+  { cat:"sushi", catLabel:"Суши", glyph:"🍣", items:[
+    { id:"su1", name:"Название блюда 1", desc:"Краткое описание состава блюда", weight:"— г", price:350 },
+    { id:"su2", name:"Название блюда 2", desc:"Краткое описание состава блюда", weight:"— г", price:400 },
+    { id:"su3", name:"Название блюда 3", desc:"Краткое описание состава блюда", weight:"— г", price:450 },
+    { id:"su4", name:"Название блюда 4", desc:"Краткое описание состава блюда", weight:"— г", price:500 }
+  ]},
+  { cat:"asian", catLabel:"Азиатская кухня", glyph:"🍜", items:[
+    { id:"az1", name:"Название блюда 1", desc:"Краткое описание состава блюда", weight:"— г", price:300 },
+    { id:"az2", name:"Название блюда 2", desc:"Краткое описание состава блюда", weight:"— г", price:340 },
+    { id:"az3", name:"Название блюда 3", desc:"Краткое описание состава блюда", weight:"— г", price:380 },
+    { id:"az4", name:"Название блюда 4", desc:"Краткое описание состава блюда", weight:"— г", price:420 }
+  ]},
+  { cat:"shaurma", catLabel:"Шаурма", glyph:"🌯", items:[
+    { id:"sh1", name:"Название блюда 1", desc:"Краткое описание состава блюда", weight:"— г", price:180 },
+    { id:"sh2", name:"Название блюда 2", desc:"Краткое описание состава блюда", weight:"— г", price:200 },
+    { id:"sh3", name:"Название блюда 3", desc:"Краткое описание состава блюда", weight:"— г", price:220 },
+    { id:"sh4", name:"Название блюда 4", desc:"Краткое описание состава блюда", weight:"— г", price:240 }
+  ]}
+];
+
+/* ==========================================================
+   Состояние корзины (сохраняется в localStorage)
+   ========================================================== */
+let cart = {};
+try { cart = JSON.parse(localStorage.getItem("zamzam-cart")) || {}; } catch(e) { cart = {}; }
+function saveCart(){ localStorage.setItem("zamzam-cart", JSON.stringify(cart)); }
+
+function findItem(id){
+  for (const group of MENU){
+    const found = group.items.find(i => i.id === id);
+    if (found) return found;
+  }
+  return null;
+}
+function findGroupGlyph(id){
+  const group = MENU.find(g => g.items.some(i => i.id === id));
+  return group ? group.glyph : "";
+}
+function cartCount(){ return Object.values(cart).reduce((s,q)=>s+q,0); }
+function cartTotal(){
+  return Object.entries(cart).reduce((sum,[id,qty])=>{
+    const item = findItem(id);
+    return sum + (item ? item.price*qty : 0);
+  },0);
+}
+function addToCart(id){
+  if(!id) return;
+  cart[id] = (cart[id]||0)+1;
+  saveCart(); updateCartUI();
+}
+function removeFromCart(id){
+  if(!id || !cart[id]) return;
+  cart[id]-=1;
+  if(cart[id]<=0) delete cart[id];
+  saveCart(); updateCartUI();
+}
+function deleteFromCart(id){
+  delete cart[id];
+  saveCart(); updateCartUI();
+}
+function clearCart(){
+  if(Object.keys(cart).length===0) return;
+  if(!confirm("Очистить корзину? Все добавленные блюда будут удалены.")) return;
+  cart = {}; saveCart(); updateCartUI();
+}
+function moneyFmt(n){ return n.toLocaleString("ru-RU") + " " + CONFIG.currency; }
+
+/* ==========================================================
+   Рендер вкладок категорий (плавный скролл + активная вкладка)
+   ========================================================== */
+const catTabsEl = document.getElementById("catTabs");
+function buildTabs(){
+  catTabsEl.innerHTML = MENU.map(g =>
+    `<a href="#${g.cat}" class="cat-tab" data-cat="${g.cat}">${g.glyph} ${g.catLabel}</a>`
+  ).join("");
+  catTabsEl.querySelectorAll(".cat-tab").forEach(tab=>{
+    tab.addEventListener("click", ()=>{
+      catTabsEl.querySelectorAll(".cat-tab").forEach(t=>t.classList.remove("active"));
+      tab.classList.add("active");
+    });
+  });
+  catTabsEl.querySelector(".cat-tab").classList.add("active");
+}
+
+/* ==========================================================
+   Рендер карточек блюд
+   ========================================================== */
+function renderDishCardHTML(item, glyph){
+  const qty = cart[item.id] || 0;
+  return `
+    <article class="dish-card" data-id="${item.id}">
+      <div class="dish-photo photo-slot" data-photo="images/${item.id}.jpg">
+        <span class="photo-fallback">images/${item.id}.jpg</span>
+        <span class="dish-photo-badge">${glyph}</span>
+      </div>
+      <div class="dish-body">
+        <div class="dish-top">
+          <p class="dish-name">${item.name}</p>
+          <span class="dish-price">${moneyFmt(item.price)}</span>
+        </div>
+        <p class="dish-desc">${item.desc}</p>
+        <span class="dish-weight">${item.weight}</span>
+        <div class="dish-bottom">
+          <div class="qty-stepper">
+            <button class="qty-minus" aria-label="Убрать одну штуку">−</button>
+            <span class="qty-value">${qty}</span>
+            <button class="qty-plus" aria-label="Добавить одну штуку">+</button>
+          </div>
+          <button class="add-btn ${qty>0?"in-cart":""}">${qty>0?"Добавлено":"В корзину"}</button>
+        </div>
+      </div>
+    </article>`;
+}
+
+function wireCardEvents(container){
+  container.querySelectorAll(".dish-card").forEach(card=>{
+    const id = card.dataset.id;
+    card.querySelector(".qty-plus").addEventListener("click", e=>{ e.stopPropagation(); addToCart(id); });
+    card.querySelector(".add-btn").addEventListener("click", e=>{ e.stopPropagation(); addToCart(id); });
+    card.querySelector(".qty-minus").addEventListener("click", e=>{ e.stopPropagation(); removeFromCart(id); });
+    card.addEventListener("click", ()=> openDishModal(id));
+  });
+  loadPhotoSlots(container);
+}
+
+function buildGrid(){
+  MENU.forEach(group=>{
+    const grid = document.getElementById(group.cat+"Grid");
+    if(!grid) return;
+    grid.innerHTML = group.items.map(item=>renderDishCardHTML(item, group.glyph)).join("");
+    wireCardEvents(grid);
+    const countEl = document.getElementById(group.cat+"Count");
+    if(countEl) countEl.textContent = group.items.length + " позиций";
+  });
+}
+
+function updateMenuQuantities(){
+  document.querySelectorAll(".dish-card").forEach(card=>{
+    const id = card.dataset.id;
+    const qty = cart[id] || 0;
+    const qtyValueEl = card.querySelector(".qty-value");
+    const addBtnEl = card.querySelector(".add-btn");
+    if(qtyValueEl) qtyValueEl.textContent = qty;
+    if(addBtnEl){
+      addBtnEl.textContent = qty>0 ? "Добавлено" : "В корзину";
+      addBtnEl.classList.toggle("in-cart", qty>0);
+    }
+  });
+  if(currentModalId) updateDishModalQty();
+}
+function updateCartUI(){ updateMenuQuantities(); buildCart(); }
+
+/* ==========================================================
+   Фото: если файл существует — показываем, если нет — заглушка
+   ========================================================== */
+function loadPhotoSlots(scope){
+  scope.querySelectorAll(".photo-slot:not(.photo-checked)").forEach(el=>{
+    el.classList.add("photo-checked");
+    const src = el.dataset.photo;
+    if(!src) return;
+    const img = new Image();
+    img.onload = ()=>{ el.style.backgroundImage = `url('${src}')`; el.style.backgroundSize="cover"; el.style.backgroundPosition="center"; el.classList.add("has-photo"); };
+    img.src = src;
+  });
+}
+
+/* ==========================================================
+   Рендер корзины
+   ========================================================== */
+const cartItemsEl = document.getElementById("cartItems");
+const cartEmptyEl = document.getElementById("cartEmpty");
+const cartTotalEl = document.getElementById("cartTotal");
+const cartCountEl = document.getElementById("cartCount");
+
+function buildCart(){
+  const entries = Object.entries(cart);
+  cartCountEl.textContent = cartCount();
+  if(entries.length===0){
+    cartEmptyEl.style.display="block";
+    cartItemsEl.style.display="none";
+    cartItemsEl.innerHTML="";
+  } else {
+    cartEmptyEl.style.display="none";
+    cartItemsEl.style.display="flex";
+    cartItemsEl.innerHTML = entries.map(([id,qty])=>{
+      const item = findItem(id);
+      if(!item) return "";
+      return `
+        <li class="cart-item" data-id="${id}">
+          <div>
+            <p class="cart-item-name">${item.name}</p>
+            <span class="cart-item-line">${qty} × ${moneyFmt(item.price)} = ${moneyFmt(item.price*qty)}</span>
+          </div>
+          <div class="cart-item-right">
+            <div class="qty-stepper">
+              <button class="qty-minus" aria-label="Убрать одну штуку">−</button>
+              <span class="qty-value">${qty}</span>
+              <button class="qty-plus" aria-label="Добавить одну штуку">+</button>
+            </div>
+            <button class="cart-item-remove" aria-label="Удалить из корзины">&times;</button>
+          </div>
+        </li>`;
+    }).join("");
+    cartItemsEl.querySelectorAll(".cart-item").forEach(row=>{
+      const id = row.dataset.id;
+      row.querySelector(".qty-plus").addEventListener("click", ()=>addToCart(id));
+      row.querySelector(".qty-minus").addEventListener("click", ()=>removeFromCart(id));
+      row.querySelector(".cart-item-remove").addEventListener("click", ()=>deleteFromCart(id));
+    });
+  }
+  cartTotalEl.textContent = moneyFmt(cartTotal());
+}
+function renderAll(){ buildGrid(); buildCart(); }
+
+/* ==========================================================
+   WhatsApp — сборка сообщения и ссылки
+   ========================================================== */
+function buildWhatsappLink(message){
+  return `https://wa.me/${CONFIG.whatsappPhone}?text=${encodeURIComponent(message)}`;
+}
+function buildOrderMessage(){
+  const entries = Object.entries(cart);
+  const address = document.getElementById("orderAddress").value.trim();
+  const comment = document.getElementById("orderComment").value.trim();
+  let lines = [`Здравствуйте! Хочу оформить заказ в ${CONFIG.restaurantName}:`, ""];
+  entries.forEach(([id,qty])=>{
+    const item = findItem(id);
+    if(item) lines.push(`• ${item.name} — ${qty} шт. (${moneyFmt(item.price*qty)})`);
+  });
+  lines.push("");
+  lines.push(`Итого: ${moneyFmt(cartTotal())}`);
+  if(address) lines.push(`Адрес: ${address}`);
+  if(comment) lines.push(`Комментарий: ${comment}`);
+  return lines.join("\n");
+}
+function setStaticWhatsappLinks(){
+  const link = buildWhatsappLink(CONFIG.greetingMessage);
+  ["headerWhatsapp","heroWhatsapp","floatWhatsapp","footerWhatsapp"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.href = link;
+  });
+}
+document.getElementById("checkoutWhatsapp").addEventListener("click", ()=>{
+  if(Object.keys(cart).length===0){
+    alert("Корзина пуста — добавьте блюда перед оформлением заказа.");
+    return;
+  }
+  window.open(buildWhatsappLink(buildOrderMessage()), "_blank", "noopener");
+});
+
+/* ==========================================================
+   UI: корзина-шторка
+   ========================================================== */
+const cartDrawer = document.getElementById("cartDrawer");
+const cartOverlay = document.getElementById("cartOverlay");
+function openCart(){ cartDrawer.classList.add("open"); cartOverlay.classList.add("open"); }
+function closeCart(){ cartDrawer.classList.remove("open"); cartOverlay.classList.remove("open"); }
+document.getElementById("cartToggle").addEventListener("click", openCart);
+document.getElementById("cartClose").addEventListener("click", closeCart);
+document.getElementById("cartClear").addEventListener("click", clearCart);
+cartOverlay.addEventListener("click", closeCart);
+
+/* ==========================================================
+   UI: модальное окно с деталями блюда
+   ========================================================== */
+let currentModalId = null;
+const dishModal = document.getElementById("dishModal");
+const dishModalOverlay = document.getElementById("dishModalOverlay");
+const dishModalPhoto = document.querySelector(".dish-modal-photo");
+
+function openDishModal(id){
+  const item = findItem(id);
+  if(!item) return;
+  currentModalId = id;
+  document.getElementById("dishModalName").textContent = item.name;
+  document.getElementById("dishModalDesc").textContent = item.desc || "";
+  document.getElementById("dishModalWeight").textContent = item.weight || "";
+  document.getElementById("dishModalPrice").textContent = moneyFmt(item.price);
+  document.getElementById("dishModalBadge").textContent = findGroupGlyph(id);
+  dishModalPhoto.dataset.photo = `images/${id}.jpg`;
+  dishModalPhoto.classList.remove("has-photo","photo-checked");
+  dishModalPhoto.style.backgroundImage = "";
+  document.getElementById("dishModalPhotoFallback").textContent = `images/${id}.jpg`;
+  dishModalPhoto.classList.add("photo-slot");
+  loadPhotoSlots(dishModal);
+  updateDishModalQty();
+  dishModal.classList.add("open");
+  dishModalOverlay.classList.add("open");
+}
+function closeDishModal(){
+  dishModal.classList.remove("open");
+  dishModalOverlay.classList.remove("open");
+  currentModalId = null;
+}
+function updateDishModalQty(){
+  if(!currentModalId) return;
+  const qty = cart[currentModalId] || 0;
+  document.getElementById("dishModalQty").textContent = qty;
+  const btn = document.getElementById("dishModalAddBtn");
+  btn.textContent = qty>0 ? "Добавлено" : "В корзину";
+  btn.classList.toggle("in-cart", qty>0);
+}
+document.getElementById("dishModalClose").addEventListener("click", closeDishModal);
+dishModalOverlay.addEventListener("click", closeDishModal);
+document.getElementById("dishModalPlus").addEventListener("click", ()=>addToCart(currentModalId));
+document.getElementById("dishModalMinus").addEventListener("click", ()=>removeFromCart(currentModalId));
+document.getElementById("dishModalAddBtn").addEventListener("click", ()=>addToCart(currentModalId));
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeDishModal(); closeCart(); } });
+
+/* ==========================================================
+   UI: мобильное меню
+   ========================================================== */
+const navToggle = document.getElementById("navToggle");
+const mainNav = document.getElementById("mainNav");
+navToggle.addEventListener("click", ()=> mainNav.classList.toggle("open"));
+mainNav.querySelectorAll("a").forEach(a=> a.addEventListener("click", ()=> mainNav.classList.remove("open")));
+
+/* ==========================================================
+   Init
+   ========================================================== */
+buildTabs();
+setStaticWhatsappLinks();
+renderAll();
+loadPhotoSlots(document);
+</script>
 </body>
 </html>
